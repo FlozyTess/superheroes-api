@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class Hero(db.model):
+class Hero(db.Model):
     __tablename__= 'heroes'
 
     id = db.Column(db.Integer, primary_key=True)
