@@ -19,3 +19,9 @@ class Hero(db.model):
             "super_name": self.super_name,
             "hero_powers": [hero_power.to_dict() for hero_power in self.hero_powers]
         }
+class Power(db.Model):
+    __tablename__ = 'powers'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    description = db.Column(db.String, nullable=False)
