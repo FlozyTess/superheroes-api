@@ -39,4 +39,18 @@ class Power(db.Model):
 class HeroPower(db.Model):
     __tablename__ = 'hero_powers'
     id = db.Column(db.Integer, primary_key=True)
-    strength = db.Column(db.String, nullable=False)        
+    strength = db.Column(db.String, nullable=False)
+
+    # relationship btwn heropower,hero & power since it belongs to them 
+    hero_id = db.Column(db.Integer, db.ForeignKey('heroes.id'), nullable=False)
+    power_id = db.Column(db.Integer, db.ForeignKey('powers.id'), nullable=False)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "hero_id": self.hero_id,
+            "power_id": self.power_id,
+            "strength": self.strength,
+            "hero": self.hero.to_dict(),
+            "power": self.power.to_dict()
+        }        
