@@ -1,21 +1,6 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from .models import db, Hero,Power,HeroPower
+from app import create_app
 
-app = Flask(__name__) #initialize app
-
-# Configure database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///superheroes.db'  
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# Initialize extensions
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-
-@app.route('/')
-def home():
-    return "Superhero API"
+app = create_app() 
 
 if __name__ == '__main__':
     app.run(debug=True)
