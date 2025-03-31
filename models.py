@@ -9,7 +9,7 @@ class Hero(db.model):
     name = db.Column(db.String, nullable=False)
     super_name = db.Column(db.String, nullable=False)
   
-    #relationship with hero power
+    #relationship btwn hero and hero power (one to many)
     hero_powers = db.relationship('HeroPower', backref='hero', cascade="all, delete")
 
     def to_dict(self):
@@ -26,7 +26,7 @@ class Power(db.Model):
     name = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
 
-    #relationship
+    #relationship btwn power and hero power(one to many)
     hero_powers = db.relationship('HeroPower', backref='power', cascade="all, delete")
     
     def to_dict(self):
@@ -35,3 +35,8 @@ class Power(db.Model):
             "name": self.name,
             "description": self.description
         }
+
+class HeroPower(db.Model):
+    __tablename__ = 'hero_powers'
+    id = db.Column(db.Integer, primary_key=True)
+    strength = db.Column(db.String, nullable=False)        
