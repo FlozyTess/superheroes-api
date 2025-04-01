@@ -15,5 +15,9 @@ def create_app():
     Migrate(app, db)
 
     from .models import Hero, Power, HeroPower 
-
+    
+    #routes registration
+    from .routes import main
+    app.register_blueprint(main)
+    
     return app

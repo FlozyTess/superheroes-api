@@ -26,3 +26,6 @@
 `git clone https://github.com/your-username/superheroes-api.git
 cd superheroes-api`
 
+2. Create a virtual environment:
+`python -m venv venv
+source venv/bin/activate`
