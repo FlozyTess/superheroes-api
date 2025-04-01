@@ -29,3 +29,8 @@ cd superheroes-api`
 2. Create a virtual environment:
 `python -m venv venv
 source venv/bin/activate`
+
+
+# License
+### This project is licensed under the MIT License - see the LICENSE file for details.
+
