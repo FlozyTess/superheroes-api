@@ -55,3 +55,5 @@ class HeroPower(db.Model):
             "hero": self.hero.to_dict(),
             "power": self.power.to_dict()
         }        
+
+print("models successful.")

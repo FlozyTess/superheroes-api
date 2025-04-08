@@ -20,6 +20,6 @@ def create_app():
     
     #routes registration
     from .routes import main
-    app.register_blueprint(main, url_prefix='/api')
+    app.register_blueprint(main)
     
     return app
