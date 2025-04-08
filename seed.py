@@ -1,30 +1,52 @@
-import sys
-import os
- 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from random import choice as rc
 
-from __init__ import create_app, db
+from app import create_app, db
 from models import Hero, Power, HeroPower
 
 app = create_app()
 
-with app.app_context():
-    db.create_all()
+if __name__ == '__main__':
+    with app.app_context():
+        print("Clearing db...")
+        Power.query.delete()
+        Hero.query.delete()
+        HeroPower.query.delete()
 
-# Create hero
-    hero1 = Hero(name="Kamala Khan", super_name="Ms. Marvel")
-    hero2 = Hero(name="Carol Danvers", super_name="Captain Marvel")
-    
-# Create powers    
-    power1 = Power(name="Flight", description="Gives the wielder the ability to fly at supersonic speeds")
-    power2 = Power(name="Super Strength", description="Gives the wielder super-human strength")
+        print("Seeding powers...")
+        powers = [
+            Power(name="super strength", description="gives the wielder super-human strengths"),
+            Power(name="flight", description="gives the wielder the ability to fly through the skies at supersonic speed"),
+            Power(name="super human senses", description="allows the wielder to use her senses at a super-human level"),
+            Power(name="elasticity", description="can stretch the human body to extreme lengths"),
+        ]
 
-# Assign powers to heroes
-    hero_power1 = HeroPower(hero=hero1, power=power1, strength="Strong")
-    hero_power2 = HeroPower(hero=hero2, power=power2, strength="Average")
+        db.session.add_all(powers)
 
+        print("Seeding heroes...")
+        heroes = [
+            Hero(name="Kamala Khan", super_name="Ms. Marvel"),
+            Hero(name="Doreen Green", super_name="Squirrel Girl"),
+            Hero(name="Gwen Stacy", super_name="Spider-Gwen"),
+            Hero(name="Janet Van Dyne", super_name="The Wasp"),
+            Hero(name="Wanda Maximoff", super_name="Scarlet Witch"),
+            Hero(name="Carol Danvers", super_name="Captain Marvel"),
+            Hero(name="Jean Grey", super_name="Dark Phoenix"),
+            Hero(name="Ororo Munroe", super_name="Storm"),
+            Hero(name="Kitty Pryde", super_name="Shadowcat"),
+            Hero(name="Elektra Natchios", super_name="Elektra"),
+        ]
 
-    db.session.add_all([hero1, hero2, power1, power2, hero_power1, hero_power2])
-    db.session.commit()
+        db.session.add_all(heroes)
 
-    print("Data seeded successfully.")
+        print("Adding powers to heroes...")
+        strengths = ["Strong", "Weak", "Average"]
+        hero_powers = []
+        for hero in heroes:
+            power = rc(powers)
+            hero_powers.append(
+                HeroPower(hero=hero, power=power, strength=rc(strengths))
+            )
+        db.session.add_all(hero_powers)
+        db.session.commit()
+
+        print("seeding successful")
