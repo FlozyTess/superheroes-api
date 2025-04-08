@@ -3,8 +3,8 @@ import os
  
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from superheroes_api import create_app, db
-from superheroes_api.models import Hero, Power, HeroPower
+from __init__ import create_app, db
+from models import Hero, Power, HeroPower
 
 app = create_app()
 
