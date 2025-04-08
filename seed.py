@@ -1,5 +1,4 @@
 from random import choice as rc
-
 from app import create_app, db
 from models import Hero, Power, HeroPower
 
@@ -8,6 +7,7 @@ app = create_app()
 if __name__ == '__main__':
     with app.app_context():
         print("Clearing db...")
+        
         Power.query.delete()
         Hero.query.delete()
         HeroPower.query.delete()
@@ -49,4 +49,4 @@ if __name__ == '__main__':
         db.session.add_all(hero_powers)
         db.session.commit()
 
-        print("seeding successful")
+        print("Seeding successful")
