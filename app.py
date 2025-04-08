@@ -1,4 +1,4 @@
-from superheroes_api import create_app
+from superheroes_api import create_app, db
 
 app = create_app() 
 

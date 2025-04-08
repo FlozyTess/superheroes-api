@@ -14,12 +14,12 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
-    Migrate(app, db)
+    migrate.init_app(app, db)
 
     from .models import Hero, Power, HeroPower 
     
     #routes registration
     from .routes import main
-    app.register_blueprint(main)
+    app.register_blueprint(main, url_prefix='/api')
     
     return app

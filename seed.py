@@ -3,13 +3,15 @@ import os
  
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from superheroes_api.app import app, db
+from superheroes_api import create_app, db
 from superheroes_api.models import Hero, Power, HeroPower
+
+app = create_app()
 
 with app.app_context():
     db.create_all()
 
-# Create heroes
+# Create hero
     hero1 = Hero(name="Kamala Khan", super_name="Ms. Marvel")
     hero2 = Hero(name="Carol Danvers", super_name="Captain Marvel")
     
